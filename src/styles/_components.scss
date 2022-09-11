@@ -1,0 +1,377 @@
+@use '/src/styles/abstracts/mixins/media-queries' as media-queries;
+@use '/src/styles/abstracts/mixins/prefix' as prefix;
+
+.page {
+  &-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-40);
+    justify-content: center;
+    padding-block: var(--size-60);
+    min-height: 100vh;
+    min-width: media-queries.$mobile-only;
+
+    @include media-queries.size(tablet-portrait) {
+      gap: var(--size-80);
+    }
+  }
+}
+
+.heading {
+  color: var(--dm-header-text);
+  font-size: var(--fs-heading);
+  line-height: 1.2;
+}
+
+.control {
+  --max-width: 34rem;
+  --wrapper-padding: var(--size-40);
+  
+  background-color: var(--dm-control-container-bg);
+  display: flex;
+  flex-direction: var(--control-flex-direction, row);
+  margin-inline: auto;
+  padding: var(--size-40);
+  width: min(100% - var(--wrapper-padding) * 2, var(--max-width));
+
+  @include media-queries.size(tablet-portrait) {
+    padding: var(--size-80);
+  }
+
+  &:first-child {
+    padding-block: var(--size-30);
+
+    @include media-queries.size(tablet-portrait) {
+      padding-block: var(--size-50);
+    }
+  }
+
+  &__settings {
+    --control-flex-direction: column;
+    --flow-space: var(--size-50);
+
+    @include media-queries.size(tablet-portrait) {
+      --flow-space: var(--size-60);
+    }
+  }
+
+  &__group {
+    align-items: center;
+    display: flex;
+    position: relative;
+
+    @include media-queries.size(tablet-portrait) {
+      --flow-space: var(--size-120);
+    }
+  }
+
+  &__value {
+    color: var(--dm-form-accent);
+    font-size: var(--fs-body-lg);
+    margin-left: auto;
+  }
+
+  &__checkbox {
+    @at-root :not(&) ~ & {
+      --flow-space: var(--size-100);
+    }
+
+    & + & {
+      --flow-space: var(--size-40);
+    }
+  }
+}
+
+.strength {
+  &__container {
+    --flow-space: var(--size-80);
+
+    align-items: center;
+    background-color: var(--dm-strength-container-bg);
+    display: flex;
+    padding: var(--size-20) var(--size-40);
+
+    @include media-queries.size(tablet-portrait) { 
+      padding: var(--size-40) var(--size-70);
+    }
+  }
+
+  &__label {
+    color: var(--dm-strength-label-text);
+    margin-inline-end: auto;
+  }
+
+  &__value {
+    font-size: var(--fs-body-md);
+    margin-inline-end: var(--size-30);
+  }
+
+  &__meter {
+    align-items: stretch;
+    display: flex;
+    height: var(--size-60);
+    margin-block: var(--size-15);
+
+    $strength-levels:
+      "too-weak" 1,
+      "weak" 2,
+      "medium" 3,
+      "strong" 4;
+    @each $name, $level in $strength-levels {
+      &[data-score="level-#{$level}"] {
+        .strength__bar:nth-child(-n+#{$level}) {
+          background-color: var(--clr-#{$name});
+          border: none;
+        }
+      }
+    }
+  }
+
+  &__bar {
+    border: var(--size-5) solid var(--dm-strength-bar-border);
+    margin-inline-start: var(--size-15);
+    width: var(--size-25);
+  }
+}
+
+.form {
+  &__password {
+    background-color: transparent;
+    border: none;
+    color: var(--dm-form-password-text);
+    font-size: var(--fs-body-lg);
+    width: 100%;
+    
+    @media screen and (-webkit-min-device-pixel-ratio:0) { 
+      property: value;}
+
+    &::placeholder {
+      color: var(--dm-form-password-placeholder);
+    }
+  }
+
+  &__range,
+  &__checkbox {
+    accent-color: var(--dm-form-accent);
+    color: var(--dm-body-text);
+  }
+  
+  &__range {
+    @include prefix.properties((
+      appearance: none,
+    ), webkit);
+    background-color: transparent;
+    background-image: linear-gradient(to right, var(--dm-form-accent) 0%, var(--dm-form-accent) 50%, var(--dm-form-range-runner-track-bg) 50%, var(--dm-form-range-runner-track-bg) 100%);
+    border-radius: 0;
+    cursor: pointer;
+    height: var(--size-20);
+    width: 100%;
+
+    &::-webkit-slider-thumb {
+      @include prefix.properties((
+        appearance: none,
+      ), webkit);
+    }
+
+    &::-ms-track {
+      background-color: transparent; 
+      border-color: transparent;
+      color: transparent;
+      cursor: pointer;
+      width: 100%;
+    }
+    
+    $thumbs: -webkit-slider-thumb, -moz-range-thumb, -ms-thumb;
+    @each $thumb in $thumbs {
+      &::#{$thumb} {
+        @if($thumb == -webkit-slider-thumb) {
+          -webkit-appearance: none;
+        }
+        background-color: var(--dm-form-range-thumb);
+        border: var(--size-5) solid transparent;
+        border-radius: var(--size-max);
+        box-shadow: none;
+        cursor: pointer;
+        height: var(--size-70);
+        transition: border-color var(--speed-fastest),
+                    background-color var(--speed-fastest);
+        width: var(--size-70);
+
+        &:hover {
+          border-color: var(--dm-form-accent);
+          background-color: var(--dm-form-range-runner-track-bg);
+        }
+      }
+    }
+  }
+
+  /* https://moderncss.dev/pure-css-custom-checkbox-style/ */
+  &__checkbox {
+    @include prefix.properties((
+      appearance: none,
+    ), webkit);
+    aspect-ratio: 1;
+    background-color: transparent;
+    border: var(--size-5) solid var(--dm-body-text);
+    border-radius: 0;
+    height: var(--size-50);
+    margin-inline-end: var(--size-50);
+    position: relative;
+    transition: border-color var(--speed-fastest);
+    width: var(--size-50);
+
+    &:hover,
+    &:focus-visible {
+      border-color: var(--dm-form-accent);
+    }
+
+    &:checked {
+      background-color: var(--dm-form-accent);
+      border-color: transparent;
+
+      & + .form__checkmark {
+        aspect-ratio: 1;
+        background-color: var(--dm-form-checkbox-check);
+        display: inline-block;
+        left: 0.15rem;
+        @include prefix.properties((
+          mask-image: url(/images/icon-check.svg),
+          mask-position: var(center),
+          mask-repeat: no-repeat,
+        ), (moz webkit));
+        position: absolute;
+        top: 0.45rem;
+        width: var(--size-40);
+      }
+    }
+
+    &:disabled {
+      opacity: 0.3;
+    }
+  }
+
+  &__checkmark {
+    display: none;
+  }
+}
+
+.button {
+  align-items: center;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+
+  &:disabled {
+    cursor: default;
+    opacity: 0.5;
+  }
+
+  &__copy {
+    --icon-mask-pos: right;
+
+    padding-inline-start: var(--size-20);
+  }
+
+  &__generate {
+    background-color: var(--dm-form-accent);
+    background-repeat: no-repeat;
+    background-position: calc(50% + 4rem);
+    background-size: 1rem auto;
+    border: var(--size-5) solid transparent;
+    color: var(--dm-button-generate-text);
+    padding: var(--size-40);
+    transition: color var(--speed-fastest),
+                background-color var(--speed-fastest);
+
+    @include media-queries.size(tablet-portrait) { 
+      --flow-space: var(--size-80);
+    }
+
+    &:not(:disabled) {
+      &:hover,
+      &:focus-visible {
+        background-color: var(--dm-control-container-bg);
+        border-color: var(--dm-form-accent);
+        color: var(--dm-form-accent);
+      }
+    }
+  }
+}
+
+.icon {
+  aspect-ratio: 1;
+  background-color: var(--icon-bg-clr);
+  @include prefix.properties((
+    mask-image: var(--icon-mask-img),
+    mask-position: var(--icon-mask-pos, center),
+    mask-repeat: no-repeat,
+  ), (moz webkit));
+  transition: background-color var(--speed-fastest);
+  width: var(--icon-w);
+
+  &__copy {
+    --icon-bg-clr: var(--dm-form-accent);
+    --icon-mask-img: url(/images/icon-copy.svg);
+    --icon-w: var(--size-50);
+
+    @include media-queries.size(tablet-portrait) {
+      --icon-w: var(--size-60);
+    }
+
+    @at-root .button__copy:not(:disabled):where(:hover, :focus-visible) & {
+      --icon-bg-clr: var(--dm-body-text);
+    }
+  }
+
+  &__generate {
+    --icon-bg-clr: var(--dm-button-generate-text);
+    --icon-mask-img: url(/images/icon-arrow-right.svg);
+    --icon-w: var(--size-30);
+
+    margin-inline-start: var(--size-60);
+
+    @at-root .button__generate:not(:disabled):where(:hover, :focus-visible) & {
+      background-color: var(--dm-form-accent);
+    }
+  }
+}
+
+.notification {
+  &__copy {
+    align-self: center;
+    color: var(--dm-form-accent);
+    margin-inline: var(--size-40) var(--size-20);
+
+    &[aria-hidden="false"] {
+      @include prefix.properties((
+        animation-name: fade-out,
+        animation-duration: var(--speed-slowest),
+      ), webkit);
+
+      @include media-queries.prefers-reduced-motion() {
+        @include prefix.properties((
+          animation-name: none,
+        ), webkit);
+      }
+    }
+
+    &[aria-hidden="true"] {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+}
+
+@include prefix.keyframes-with-webkit(fade-out) {
+  from {
+    opacity: 1;
+  }
+
+  25% {
+    opacity: 1,
+  }
+
+  to {
+    opacity: 0;
+  }
+}

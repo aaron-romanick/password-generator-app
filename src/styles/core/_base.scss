@@ -1,0 +1,47 @@
+@use '/src/styles/abstracts/mixins/media-queries' as media-queries;
+@use '/src/styles/abstracts/mixins/prefix' as prefix;
+
+body {
+
+  /* Default Body Text Font Size */
+  --fs-heading: var(--fs-base);
+  --fs-body-lg: var(--fs-2xl);
+  --fs-body-md: var(--fs-lg);
+  --fs-body-sm: var(--fs-base);
+
+  @include media-queries.size(tablet-portrait) { 
+    --fs-heading: var(--fs-2xl);
+    --fs-body-lg: var(--fs-3xl);
+    --fs-body-md: var(--fs-2xl);
+    --fs-body-sm: var(--fs-lg);
+  }
+
+  background-attachment: fixed;
+  background-image: linear-gradient(var(--clr-neutral-100), var(--clr-neutral-0));
+  background-repeat: no-repeat;
+  color: var(--dm-body-text);
+  font-family: var(--ff-primary);
+  font-size: var(--fs-base);
+  font-weight: var(--fw-primary);
+}
+
+main {
+  font-size: var(--fs-body-sm);
+}
+
+a {
+  color: currentColor;
+}
+
+button {
+  @include prefix.properties((
+    appearance: none,
+  ), (moz, webkit));
+  border: none;
+  cursor: pointer;
+}
+
+:focus,
+:focus-visible {
+  outline: var(--dm-body-text) dotted var(--size-10);
+}

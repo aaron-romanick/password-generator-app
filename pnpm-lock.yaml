@@ -4,6 +4,10 @@ specifiers:
   sass: ^1.54.8
   typescript: ^4.6.4
   vite: ^3.0.7
+  zxcvbn: ^4.4.2
+
+dependencies:
+  zxcvbn: 4.4.2
 
 devDependencies:
   sass: 1.54.8
@@ -449,3 +453,7 @@ packages:
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
+
+  /zxcvbn/4.4.2:
+    resolution: {integrity: sha512-Bq0B+ixT/DMyG8kgX2xWcI5jUvCwqrMxSFam7m0lAf78nf04hv6lNCsyLYdyYTrCVMqNDY/206K7eExYCeSyUQ==}
+    dev: false

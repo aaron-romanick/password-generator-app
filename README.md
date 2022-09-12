@@ -33,7 +33,7 @@ Users should be able to:
 
 ### <a name="links"></a>Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
+- Solution URL: [Password Generator App Using TypeScript, JS Crypto and zxcvbn](https://www.frontendmentor.io/solutions/password-generator-app-using-typescript-js-crypto-and-zxcvbn-7wuQz9cn8G)
 - Live Site URL: [https://aaron-romanick.github.io/password-generator-app/](https://aaron-romanick.github.io/password-generator-app/)
 
 ## <a name="my-process"></a>My Process

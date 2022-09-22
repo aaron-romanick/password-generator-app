@@ -9,7 +9,11 @@ export default defineConfig({
 		rollupOptions: {
 			output: {
 				assetFileNames: 'style.css',
+				chunkFileNames: 'vendor/[name].js',
 				entryFileNames: 'main.js',
+				manualChunks: {
+					zxcvbn: ['zxcvbn'],
+				},
 			},
 		},
 	},

@@ -236,7 +236,7 @@
         left: 0.15rem;
         @include prefix.properties((
           mask-image: url(/images/icon-check.svg),
-          mask-position: var(center),
+          mask-position: center,
           mask-repeat: no-repeat,
         ), (moz webkit));
         position: absolute;

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="icon" type="image/png" sizes="512x192" href="https://www.aaronromanick.com/favicon/android-chrome-512x512.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="https://www.aaronromanick.com/favicon/android-chrome-192x192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://www.aaronromanick.com/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://www.aaronromanick.com/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://www.aaronromanick.com/favicon/favicon-16x16.png">
+    <link rel="manifest" href="https://www.aaronromanick.com/favicon/site.webmanifest">
+    <meta name="msapplication-TileColor" content="#223344">
+    <meta name="theme-color" content="#223344">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Password Generator App</title>
+    <script type="module" crossorigin src="/password-generator-app/main.js"></script>
+    <link rel="modulepreload" crossorigin href="/password-generator-app/vendor/zxcvbn.js">
+    <link rel="stylesheet" href="/password-generator-app/style.css">
+  </head>
+  <body>
+    <div class="page-wrap">
+      <header>
+        <h1 class="heading | center-text">Password Generator</h1>
+      </header>
+      <main class="flow">
+        <div class="control">
+          <input
+            readonly
+            class="form__password"
+            placeholder="P4$5W0rD!"
+            type="text"
+            value="asdfkjasd;fkls"
+          >
+          <span
+            aria-hidden="true"
+            aria-live="off"
+            class="notification__copy | uppercase"
+            role="status"
+          >
+            Copied
+          </span>
+          <button
+            class="button button__copy"
+            title="Copy to clipboard"
+          >
+            <span class="visually-hidden">
+              Copy to clipboard
+            </span>
+            <span aria-hidden="true" class="icon icon__copy"></span>
+          </button>
+        </div>
+        <div class="control control__settings | flow">
+          <label
+            class="control__group control__character-length"
+            for="character-length"
+          >
+            <span class="control__label">Character Length</span>
+            <span class="control__value">0</span>
+          </label>
+          <input
+            class="form__range"
+            id="character-length"
+            max="50"
+            min="0"
+            name="password_length"
+            type="range"
+          >
+          <label
+            class="control__group control__checkbox"
+            for="include-uppercase"
+          >
+            <input class="form__checkbox" type="checkbox" name="uppercase" id="include-uppercase" checked>
+            <span
+              aria-hidden="true"
+              class="form__checkmark"
+            ></span>
+            <span class="control__label">Include Uppercase Letters</span>
+          </label>
+          <label
+            class="control__group control__checkbox"
+            for="include-lowercase"
+          >
+            <input type="checkbox" name="lowercase" id="include-lowercase" class="form__checkbox" checked>
+            <span
+              aria-hidden="true"
+              class="form__checkmark"
+            ></span>
+            <span class="control__label">Include Lowercase Letters</span>
+          </label>
+          <label
+            class="control__group control__checkbox"
+            for="include-numbers"
+          >
+            <input type="checkbox" name="numbers" id="include-numbers" class="form__checkbox" checked>
+            <span
+              aria-hidden="true"
+              class="form__checkmark"
+            ></span>
+            <span class="control__label">Include Numbers</span>
+          </label>
+          <label
+            class="control__group control__checkbox"
+            for="include-symbols"
+          >
+            <input type="checkbox" name="symbols" id="include-symbols" class="form__checkbox" checked>
+            <span
+              aria-hidden="true"
+              class="form__checkmark"
+            ></span>
+            <span class="control__label">Include Symbols</span>
+          </label>
+          <div class="strength__container | uppercase">
+            <span class="strength__label">
+              Strength
+            </span>
+            <span
+              class="strength__value"
+            ></span>
+            <div class="strength__meter">
+              <span class="strength__bar"></span>
+              <span class="strength__bar"></span>
+              <span class="strength__bar"></span>
+              <span class="strength__bar"></span>
+            </div>
+          </div>
+          <button
+            class="button button__generate | uppercase"
+            title="Generate Password"
+          >
+            <span>Generate</span>
+            <span aria-hidden="true" class="icon icon__generate"></span>
+          </button>
+        </div>
+      </main>
+    </div>
+    
+  </body>
+</html>
